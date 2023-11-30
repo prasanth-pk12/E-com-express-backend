@@ -17,7 +17,11 @@ mongoose.connect(process.env.MONGODB_URI, {
 });
 
 // Middleware
-app.use(cors({ origin: 'http://localhost:3000' }));
+app.use(cors({ 
+  origin: (origin, callback) => callback(null, true), //allows any origin
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE'
+}));
+
 app.use(express.json());
 
 // Routes
